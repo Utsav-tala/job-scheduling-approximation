@@ -1,20 +1,22 @@
-# Single Machine Scheduling — Approximation Algorithms
+# 🎯 Single Machine Scheduling — Approximation Algorithms
 
 ## 📖 Overview
 
-This project is a **web-based interactive visualization** of the **Single Machine Scheduling Problem** from Approximation Algorithms.
+This project is an **interactive web-based visualization** of the **Single Machine Scheduling Problem**, a fundamental topic in Approximation Algorithms.
 
-It demonstrates how different scheduling strategies affect job execution, completion time, and lateness using **real-time animations and metrics**.
+It demonstrates how different scheduling strategies affect:
 
-The project is implemented as a **single-page application (HTML + CSS + JavaScript)** and deployed using Netlify with **auto-deploy enabled via GitHub integration**.
+* Job execution order
+* Completion times
+* Lateness and delays
+
+The project combines **theoretical concepts, approximation guarantees, and real-time visualization** to provide an intuitive understanding of scheduling algorithms.
 
 ---
 
 ## 🌐 Live Demo
 
-👉 Add your Netlify link here
-Example:
-`https://your-site-name.netlify.app`
+👉 https://scheduling-on-single-machine.netlify.app
 
 ---
 
@@ -22,58 +24,60 @@ Example:
 
 In the **Single Machine Scheduling Problem**, we are given a set of jobs where:
 
-* Only **one job can run at a time**
+* Only **one job can be processed at a time**
 * Each job has:
 
-  * Processing time (pⱼ)
-  * Release time (rⱼ)
-  * Due date (dⱼ)
+  * **Processing time (pⱼ)**
+  * **Release time (rⱼ)**
+  * **Due date (dⱼ)**
 
-The goal is to determine the **execution order** that optimizes performance metrics such as:
+### Objective:
+
+Find an ordering of jobs that optimizes performance measures such as:
 
 * Total Completion Time (ΣCⱼ)
-* Flow Time (Fⱼ)
-* Maximum Lateness (Lₘₐₓ)
+* Flow Time (Fⱼ = Cⱼ − rⱼ)
+* Maximum Lateness (Lₘₐₓ = max(Cⱼ − dⱼ))
 
 ---
 
 ## 🧠 Algorithms Implemented
 
-### 1. FCFS (First Come First Serve)
+### 🔹 FCFS — First Come First Serve
 
-* Jobs executed in order of arrival
+* Jobs are processed in order of arrival
 * Simple and fair
-* ❌ No approximation guarantee (can be very inefficient)
+* ❌ No approximation guarantee (can perform poorly)
 
 ---
 
-### 2. SPT (Shortest Processing Time)
+### 🔹 SPT — Shortest Processing Time
 
-* Chooses job with smallest processing time
-* ✅ Minimizes total completion time (ΣCⱼ) when rⱼ = 0
-* ⚠️ Heuristic when release dates exist
+* Selects job with minimum processing time
+* ✅ Optimal for minimizing ΣCⱼ when rⱼ = 0
+* ⚠️ Acts as a heuristic with release dates
 
 ---
 
-### 3. EDD (Earliest Due Date)
+### 🔹 EDD — Earliest Due Date
 
-* Chooses job with earliest due date
+* Selects job with smallest due date
 * ✅ Minimizes maximum lateness (Lₘₐₓ)
-* 📌 Proven **2-approximation** for certain cases
+* 📌 Proven **2-approximation algorithm** for certain cases
 
 ---
 
 ## ⚙️ Features
 
 * 🎬 Interactive **Gantt chart visualization**
-* 🔁 Dynamic algorithm switching (FCFS, SPT, EDD)
+* 🔁 Dynamic switching between algorithms (FCFS, SPT, EDD)
 * 📊 Real-time metrics:
 
   * Flow Time
   * Maximum Lateness
   * Completion Time
 * 🎲 Randomized job generation
-* 📚 Integrated **theory + pseudocode + proofs**
+* 📚 Integrated theory, pseudocode, and proofs
 * 🎨 Clean and modern UI
 
 ---
@@ -81,8 +85,8 @@ The goal is to determine the **execution order** that optimizes performance metr
 ## 🖥️ Tech Stack
 
 * HTML5
-* CSS3 (custom styling)
-* Vanilla JavaScript (no frameworks)
+* CSS3
+* Vanilla JavaScript
 
 ---
 
@@ -90,25 +94,17 @@ The goal is to determine the **execution order** that optimizes performance metr
 
 This project is deployed using:
 
-* GitHub Repository
-* Netlify (Auto Deploy enabled)
+* **GitHub Repository**
+* **Netlify (Auto Deploy enabled)**
 
-### 🔁 Auto Deploy Workflow:
+### 🔁 Auto Deploy Workflow
 
-1. Push changes to GitHub
-2. Netlify automatically rebuilds and redeploys
+1. Code is pushed to GitHub
+2. Netlify automatically builds and deploys
 3. Live site updates instantly
 
 ---
 
-## ▶️ How to Run Locally
-
-```bash
-Download or clone the repository
-Open index.html in your browser
-```
-
----
 
 ## 📊 Key Concepts Covered
 
@@ -126,10 +122,9 @@ Open index.html in your browser
 
 ## 📚 References
 
-* Pinedo, M. — *Scheduling: Theory, Algorithms, and Systems*
-* Vazirani, V. — *Approximation Algorithms*
-* Lawler et al. — *Sequencing and Scheduling*
-* Jackson (1955), Smith (1956)
+* Williamson, D. P., & Shmoys, D. B. (2011). *The Design of Approximation Algorithms*. Cambridge University Press.
+* Pinedo, M. L. — *Scheduling: Theory, Algorithms, and Systems*
+* Lawler, E. L. et al. — *Sequencing and Scheduling*
 
 ---
 
@@ -145,14 +140,16 @@ Your Name
 * Multi-machine scheduling visualization
 * User input for custom job sets
 * Performance comparison graphs
-* Backend integration for simulations
+* Backend simulation support
 
 ---
 
 ## ⭐ Project Highlights
 
-* Combines **theory + visualization + interaction**
-* Designed specifically for **Approximation Algorithms coursework**
-* Helps in intuitive understanding of scheduling behavior
+* Combines **theory + implementation + visualization**
+* Designed for **Approximation Algorithms coursework**
+* Helps build strong intuition for scheduling problems
 
 ---
+
+> This project bridges the gap between theoretical analysis and practical understanding of scheduling algorithms.
