@@ -1174,7 +1174,7 @@
       </div>
       <div class="gantt-wrapper" id="a2-gantt"></div>
       <div class="a2-metrics">
-        <div>Flow Time: <span id="a2-flow">0</span></div>
+        <div>ΣCj: <span id="a2-flow">0</span></div>
         <div>Lmax: <span id="a2-lmax">0</span></div>
       </div>
     </div>
@@ -1468,6 +1468,31 @@
           Therefore EDD is a <strong style="color:var(--accent5);">2-approximation algorithm</strong> for
           1|r<sub>j</sub>|L<sub>max</sub> under negative due dates.
         </p>
+
+        <!-- NEW ADDITION START -->
+        <hr style="margin:1rem 0;">
+
+        <p><strong>Special Case: All jobs available initially</strong></p>
+        <p>
+          If all jobs are available at time zero (r<sub>j</sub> = 0 ∀j), then the problem reduces to
+          (1||L<sub>max</sub>). In this case, the EDD rule produces an <strong>optimal schedule</strong>.
+        </p>
+        <p style="text-align:center;font-family:var(--font-mono);margin:0.5rem 0;">
+          L<sub>max</sub><sup>EDD</sup> = L<sub>max</sub><sup>*</sup>
+        </p>
+        <p>
+          Hence, the approximation constant becomes:
+        </p>
+        <p
+          style="text-align:center;font-family:var(--font-mono);color:var(--accent5);font-size:1.1rem;margin:0.75rem 0;">
+          &#945; = 1
+        </p>
+        <p>
+          Thus, without release times, EDD is not just an approximation algorithm but an
+          <strong style="color:var(--accent5);">optimal algorithm</strong>.
+        </p>
+        <!-- NEW ADDITION END -->
+
       </div>
     </div>
 
@@ -1573,7 +1598,7 @@
         <tr>
           <td><strong>SPT</strong></td>
           <td>Shortest processing time first</td>
-          <td>&#931;C<sub>j</sub> (mean flow time)</td>
+          <td>&#931;C<sub>j</sub> </td>
           <td><span class="math">O(n log n)</span></td>
           <td><span class="tag">Heuristic</span></td>
           <td><span class="tag optimal">&#945; = 1</span></td>
@@ -1581,7 +1606,7 @@
         <tr>
           <td><strong>EDD</strong></td>
           <td>Earliest due date first</td>
-          <td>L<sub>max</sub> (max lateness)</td>
+          <td>L<sub>max</sub></td>
           <td><span class="math">O(n log n)</span></td>
           <td><span class="tag">&#945; = 2</span></td>
           <td><span class="tag optimal">&#945; = 1</span></td>
@@ -1699,9 +1724,9 @@
       { bar: '#e8a07a', text: '#2a1608' },
     ];
     const ALGO_DESCS = {
-      fcfs: 'FCFS (First Come First Served) — jobs run in arrival order. Simple and fair, but can cause the "convoy effect": a long job blocks many short ones behind it.',
+      fcfs: 'FCFS (First Come First Served) — jobs run in arrival order. Simple and fair.',
       spt: 'SPT (Shortest Processing Time) — run the shortest job first. Provably minimizes total completion time ΣCⱼ and mean flow time.',
-      edd: 'EDD (Earliest Due Date) — run the job with the closest due date first. Jackson (1955) proved this minimizes maximum lateness Lₘₐₓ.',
+      edd: 'EDD (Earliest Due Date) — run the job with the closest due date first, this minimizes maximum lateness Lmax.',
     };
 
     let lsJobs = [
