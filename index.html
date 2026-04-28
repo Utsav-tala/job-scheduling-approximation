@@ -1830,11 +1830,11 @@
 
     /* ── COMPARISON ANIMATION ── */
     const caDefaultJobs = [
-      { id: 'J1', p: 3, d: 5, r: 0 },
-      { id: 'J2', p: 1, d: 8, r: 0 },
-      { id: 'J3', p: 4, d: 4, r: 0 },
-      { id: 'J4', p: 3, d: 10, r: 0 },
-      { id: 'J5', p: 5, d: 15, r: 0 }
+      { id: 'J1', p: 6, d: 10, r: 0 },
+      { id: 'J2', p: 6, d: 16, r: 7 },
+      { id: 'J3', p: 4, d: 5,  r: 1 },
+      { id: 'J4', p: 3, d: 7,  r: 2 },
+      { id: 'J5', p: 1, d: 15, r: 5 }
     ];
     const caJobs = caDefaultJobs.map(j => ({ ...j }));
     const caTl = document.getElementById('ca-timeline');
@@ -1931,12 +1931,44 @@
       caSetAlgo(caCurrentAlgo);
     }
 
-    /* ── scheduling with release dates ── */
-    function caComputeLmax(jobs, algo) {
-      const seq = scheduleJobs(jobs, algo || 'EDD');
-      let lmax = -Infinity;
-      seq.forEach(j => { const finish = j.start + j.p; lmax = Math.max(lmax, finish - j.d); });
-      return lmax;
+    /* ── brute-force optimal for small n (n! permutations) ── */
+    function permutations(arr) {
+      if (arr.length <= 1) return [arr];
+      const result = [];
+      arr.forEach((item, i) => {
+        const rest = arr.slice(0, i).concat(arr.slice(i + 1));
+        permutations(rest).forEach(p => result.push([item, ...p]));
+      });
+      return result;
+    }
+
+    function evalSeq(perm) {
+      let t = 0, lmax = -Infinity, flow = 0;
+      perm.forEach(job => {
+        t = Math.max(t, job.r || 0);
+        t += job.p;
+        lmax = Math.max(lmax, t - job.d);
+        flow += t;
+      });
+      return { lmax, flow };
+    }
+
+    function optimalLmax(jobs) {
+      let best = Infinity;
+      permutations(jobs).forEach(perm => {
+        const { lmax } = evalSeq(perm);
+        if (lmax < best) best = lmax;
+      });
+      return best;
+    }
+
+    function optimalFlow(jobs) {
+      let best = Infinity;
+      permutations(jobs).forEach(perm => {
+        const { flow } = evalSeq(perm);
+        if (flow < best) best = flow;
+      });
+      return best;
     }
 
     function caSetAlgo(algo) {
@@ -2005,31 +2037,31 @@
       if (elFlow) elFlow.textContent = flow;
       if (elLmax) elLmax.textContent = lmax;
 
-      // Optimal Lmax via EDD with release dates
-      const optLmax = caComputeLmax([...caJobs], 'EDD');
-      // Optimal ΣCⱼ via SPT with release dates
-      const sptSeq = scheduleJobs([...caJobs], 'SPT');
-      let sptFlow = 0;
-      sptSeq.forEach(j => { sptFlow += j.start + j.p; });
+      // True optimal via brute force (n=5, 120 permutations)
+      const optLmax = optimalLmax([...caJobs]);
+      const optFlow = optimalFlow([...caJobs]);
 
       // Approximation factors
-      const approxFlow = (sptFlow > 0) ? (flow / sptFlow).toFixed(2) : '1.00';
-      // For Lmax: ratio only meaningful when optLmax > 0; show gap otherwise
+      // α = lmax / optLmax only valid when optLmax > 0; use additive gap otherwise
       let approxLmax;
-      if (algo === 'EDD') {
-        approxLmax = '1.00';
-      } else if (optLmax > 0) {
+      if (optLmax > 0 && lmax > 0) {
         approxLmax = (lmax / optLmax).toFixed(2);
       } else {
-        approxLmax = 'gap: +' + (lmax - optLmax);
+        approxLmax = 'Δ=' + (lmax - optLmax);
+      }
+      let approxFlow;
+      if (optFlow > 0) {
+        approxFlow = (flow / optFlow).toFixed(2);
+      } else {
+        approxFlow = '1.00';
       }
 
       const caResultsEl = document.getElementById('ca-results');
       if (caResultsEl) caResultsEl.innerHTML =
         '<div class="ca-result-box">ΣC<sub>j</sub> = <strong>' + flow + '</strong></div>' +
         '<div class="ca-result-box">L<sub>max</sub> (' + algo + ') = <strong>' + lmax + '</strong></div>' +
-        '<div class="ca-result-box">L<sub>max</sub> (EDD optimal) = <strong>' + optLmax + '</strong></div>' +
-        '<div class="ca-result-box">ΣC<sub>j</sub> (SPT optimal) = <strong>' + sptFlow + '</strong></div>' +
+        '<div class="ca-result-box">L<sub>max</sub> (optimal) = <strong>' + optLmax + '</strong></div>' +
+        '<div class="ca-result-box">ΣC<sub>j</sub> (optimal) = <strong>' + optFlow + '</strong></div>' +
         '<div class="ca-result-box highlight">α (L<sub>max</sub>) = <strong>' + approxLmax + '</strong></div>' +
         '<div class="ca-result-box highlight">α (ΣC<sub>j</sub>) = <strong>' + approxFlow + '</strong></div>';
     }
