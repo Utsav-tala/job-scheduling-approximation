@@ -128,12 +128,6 @@ This project is deployed using:
 
 ---
 
-## 👨‍💻 Author
-
-Your Name
-
----
-
 ## 📌 Future Improvements
 
 * Add more algorithms (WSPT, LPT, etc.)
