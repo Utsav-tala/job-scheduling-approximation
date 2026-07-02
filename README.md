@@ -1,149 +1,148 @@
-# 🎯 Single Machine Scheduling — Approximation Algorithms
+# Single Machine Scheduling — Interactive Visualization of Approximation Algorithms
 
-## 📖 Overview
+## Overview
 
-This project is an **interactive web-based visualization** of the **Single Machine Scheduling Problem**, a fundamental topic in Approximation Algorithms.
+This project is an interactive web-based visualization of the **Single Machine Scheduling Problem**, a fundamental topic in **Approximation Algorithms** and **Scheduling Theory**.
 
-It demonstrates how different scheduling strategies affect:
-
-* Job execution order
-* Completion times
-* Lateness and delays
-
-The project combines **theoretical concepts, approximation guarantees, and real-time visualization** to provide an intuitive understanding of scheduling algorithms.
+The application demonstrates how different scheduling strategies affect job execution order, completion times, flow times, and lateness. By combining theoretical concepts with real-time visualizations, the project provides an intuitive understanding of scheduling algorithms and their performance characteristics.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-👉 https://scheduling-on-single-machine.netlify.app
-
----
-
-## 🎯 Problem Description
-
-In the **Single Machine Scheduling Problem**, we are given a set of jobs where:
-
-* Only **one job can be processed at a time**
-* Each job has:
-
-  * **Processing time (pⱼ)**
-  * **Release time (rⱼ)**
-  * **Due date (dⱼ)**
-
-### Objective:
-
-Find an ordering of jobs that optimizes performance measures such as:
-
-* Total Completion Time (ΣCⱼ)
-* Flow Time (Fⱼ = Cⱼ − rⱼ)
-* Maximum Lateness (Lₘₐₓ = max(Cⱼ − dⱼ))
+**Website:** https://scheduling-on-single-machine.netlify.app
 
 ---
 
-## 🧠 Algorithms Implemented
+## Problem Description
 
-### 🔹 FCFS — First Come First Serve
+In the **Single Machine Scheduling Problem**, a set of jobs must be scheduled on a single machine, where only one job can be processed at a time.
 
-* Jobs are processed in order of arrival
-* Simple and fair
-* ❌ No approximation guarantee (can perform poorly)
+Each job \(J_j\) is defined by:
 
----
+- **Processing Time** (\(p_j\))
+- **Release Time** (\(r_j\))
+- **Due Date** (\(d_j\))
 
-### 🔹 SPT — Shortest Processing Time
+### Objective
 
-* Selects job with minimum processing time
-* ✅ Optimal for minimizing ΣCⱼ when rⱼ = 0
-* ⚠️ Acts as a heuristic with release dates
+Determine a schedule that optimizes performance measures such as:
 
----
+- **Total Completion Time**
 
-### 🔹 EDD — Earliest Due Date
+  \[
+  \sum C_j
+  \]
 
-* Selects job with smallest due date
-* ✅ Minimizes maximum lateness (Lₘₐₓ)
-* 📌 Proven **2-approximation algorithm** for certain cases
+- **Flow Time**
 
----
+  \[
+  F_j = C_j - r_j
+  \]
 
-## ⚙️ Features
+- **Maximum Lateness**
 
-* 🎬 Interactive **Gantt chart visualization**
-* 🔁 Dynamic switching between algorithms (FCFS, SPT, EDD)
-* 📊 Real-time metrics:
-
-  * Flow Time
-  * Maximum Lateness
-  * Completion Time
-* 🎲 Randomized job generation
-* 📚 Integrated theory, pseudocode, and proofs
-* 🎨 Clean and modern UI
+  \[
+  L_{\max} = \max(C_j - d_j)
+  \]
 
 ---
 
-## 🖥️ Tech Stack
+## Algorithms Implemented
 
-* HTML5
-* CSS3
-* Vanilla JavaScript
+### FCFS (First Come First Serve)
 
----
+Jobs are processed in the order of their arrival.
 
-## 🚀 Deployment
+**Characteristics:**
 
-This project is deployed using:
-
-* **GitHub Repository**
-* **Netlify (Auto Deploy enabled)**
-
-### 🔁 Auto Deploy Workflow
-
-1. Code is pushed to GitHub
-2. Netlify automatically builds and deploys
-3. Live site updates instantly
+- Simple and fair scheduling strategy
+- Easy to implement
+- No approximation guarantee and may lead to suboptimal schedules
 
 ---
 
+### SPT (Shortest Processing Time)
 
-## 📊 Key Concepts Covered
+Selects the available job with the minimum processing time.
 
-* Scheduling with Release Dates (1 | rⱼ | •)
-* Greedy Algorithms
-* Approximation Algorithms
-* NP-hard Scheduling Problems
-* Performance Metrics:
+**Characteristics:**
 
-  * ΣCⱼ
-  * Lₘₐₓ
-  * Flow Time
+- Optimal for minimizing total completion time (\(\sum C_j\)) when all release times are zero
+- Acts as a heuristic when release dates are present
 
 ---
 
-## 📚 References
+### EDD (Earliest Due Date)
 
-* Williamson, D. P., & Shmoys, D. B. (2011). *The Design of Approximation Algorithms*. Cambridge University Press.
-* Pinedo, M. L. — *Scheduling: Theory, Algorithms, and Systems*
-* Lawler, E. L. et al. — *Sequencing and Scheduling*
+Schedules jobs according to the earliest due date.
 
----
+**Characteristics:**
 
-## 📌 Future Improvements
-
-* Add more algorithms (WSPT, LPT, etc.)
-* Multi-machine scheduling visualization
-* User input for custom job sets
-* Performance comparison graphs
-* Backend simulation support
+- Minimizes maximum lateness (\(L_{\max}\)) in the classical single-machine setting
+- Serves as an effective approximation strategy in several scheduling variants
 
 ---
 
-## ⭐ Project Highlights
+## Features
 
-* Combines **theory + implementation + visualization**
-* Designed for **Approximation Algorithms coursework**
-* Helps build strong intuition for scheduling problems
+- Interactive Gantt chart visualization
+- Dynamic switching between scheduling algorithms (FCFS, SPT, EDD)
+- Real-time computation of scheduling metrics:
+  - Completion Time
+  - Flow Time
+  - Maximum Lateness
+- Randomized job generation for experimentation
+- Integrated theoretical explanations, pseudocode, and proofs
+- Clean and responsive user interface
 
 ---
 
-> This project bridges the gap between theoretical analysis and practical understanding of scheduling algorithms.
+## Technology Stack
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+---
+
+## Key Concepts Covered
+
+- Single Machine Scheduling with Release Dates \((1 \mid r_j \mid \cdot)\)
+- Greedy Algorithms
+- Approximation Algorithms
+- NP-hard Scheduling Problems
+
+### Performance Metrics
+
+- Total Completion Time (\(\sum C_j\))
+- Maximum Lateness (\(L_{\max}\))
+- Flow Time
+
+---
+
+## References
+
+1. Williamson, D. P., & Shmoys, D. B. *The Design of Approximation Algorithms*. Cambridge University Press, 2011.
+2. Pinedo, M. L. *Scheduling: Theory, Algorithms, and Systems*.
+3. Lawler, E. L., Lenstra, J. K., Rinnooy Kan, A. H. G., & Shmoys, D. B. *Sequencing and Scheduling: Algorithms and Complexity*.
+
+---
+
+## Future Improvements
+
+- Add additional scheduling algorithms such as WSPT, LPT, and SRPT
+- Extend the visualization to multi-machine scheduling environments
+- Allow users to define custom job sets
+- Include performance comparison graphs and analytics
+- Add backend support for large-scale simulations
+
+---
+
+## Project Highlights
+
+- Combines theoretical foundations with practical implementation
+- Provides interactive visualization for better conceptual understanding
+- Designed as an educational tool for Approximation Algorithms coursework
+- Bridges the gap between algorithmic analysis and real-world scheduling behavior
+
