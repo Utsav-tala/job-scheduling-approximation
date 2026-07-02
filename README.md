@@ -18,33 +18,19 @@ The application demonstrates how different scheduling strategies affect job exec
 
 In the **Single Machine Scheduling Problem**, a set of jobs must be scheduled on a single machine, where only one job can be processed at a time.
 
-Each job \(J_j\) is defined by:
+Each job $J_{j}$ is defined by:
 
-- **Processing Time** (\(p_j\))
-- **Release Time** (\(r_j\))
-- **Due Date** (\(d_j\))
+- **Processing Time** $p_{j}$
+- **Release Time** $r_{j}$
+- **Due Date** $d_{j}$
 
 ### Objective
 
 Determine a schedule that optimizes performance measures such as:
 
-- **Total Completion Time**
-
-  \[
-  \sum C_j
-  \]
-
-- **Flow Time**
-
-  \[
-  F_j = C_j - r_j
-  \]
-
-- **Maximum Lateness**
-
-  \[
-  L_{\max} = \max(C_j - d_j)
-  \]
+- Total Completion Time: $\sum C_j$
+- Flow Time: $F_j = C_j - r_j$
+- Maximum Lateness: $L_{\max} = \max(C_j - d_j)$
 
 ---
 
@@ -68,7 +54,7 @@ Selects the available job with the minimum processing time.
 
 **Characteristics:**
 
-- Optimal for minimizing total completion time (\(\sum C_j\)) when all release times are zero
+- Optimal for minimizing total completion time $\sum C_j$ when all release times are zero
 - Acts as a heuristic when release dates are present
 
 ---
@@ -79,7 +65,7 @@ Schedules jobs according to the earliest due date.
 
 **Characteristics:**
 
-- Minimizes maximum lateness (\(L_{\max}\)) in the classical single-machine setting
+- Minimizes maximum lateness $L_{\max}$ in the classical single-machine setting
 - Serves as an effective approximation strategy in several scheduling variants
 
 ---
@@ -108,15 +94,15 @@ Schedules jobs according to the earliest due date.
 
 ## Key Concepts Covered
 
-- Single Machine Scheduling with Release Dates \((1 \mid r_j \mid \cdot)\)
+- Single Machine Scheduling with Release Dates (1 | rⱼ | •)
 - Greedy Algorithms
 - Approximation Algorithms
 - NP-hard Scheduling Problems
 
 ### Performance Metrics
 
-- Total Completion Time (\(\sum C_j\))
-- Maximum Lateness (\(L_{\max}\))
+- Total Completion Time $\sum C_j$
+- Maximum Lateness $L_{\max}$
 - Flow Time
 
 ---
